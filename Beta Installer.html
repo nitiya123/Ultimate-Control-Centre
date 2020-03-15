@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="robots" content="noindex, nofollow" />
+        <link rel="icon" type="image/x-icon" href="../img/favicon.png" />
+        <link rel="apple-touch-icon" href="../img/touch-icon.png">
+        <title>Beta Installer</title>
+        <!-- Path to Framework7 Library CSS-->
+        <link rel="stylesheet" href="css/framework7.ios.min.css">
+        <!-- Path to your custom app styles-->
+        <link rel="stylesheet" href="css/my-app.css">
+        <link rel="stylesheet" href="css/framework7-icons.css">
+        <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <script type="text/javascript">
+            function validateDeviceAndBrowser() {
+                var device = getDevice();
+                var message = "";
+                if(device == "iPhone" || device == "iPad") {
+                    if(getBrowser()) {
+                        message = "Compatible";
+                        
+                    } else {
+                    alert("Please try again using Safari browser.");
+                    window.location = "https://betainstaller.com/";
+                    }
+                } else {
+                    message = "Try with iPhone / iPad";
+                    alert("Please try again using iPhone / iPad.");
+                    window.location = "https://betainstaller.com/";
+                }
+                return message;
+            }
+            function getDevice() {
+                var device = "Unknown";
+                if(navigator.userAgent.match(/iPhone/i)) {
+                    device = "iPhone";
+                } else if(navigator.userAgent.match(/iPod/i)) {
+                    device = "iPod";
+                } else if(navigator.userAgent.match(/iPad/i)){
+                    device = "iPad";
+                }
+                //alert(device);
+                return device;
+            }
+            function getBrowser() {
+                var nVer = navigator.appVersion;
+                var nAgt = navigator.userAgent;
+                var browserName  = navigator.appName;
+                var fullVersion  = ''+parseFloat(navigator.appVersion); 
+                var majorVersion = parseInt(navigator.appVersion,10);
+                var nameOffset,verOffset,ix;
+
+                // In Opera, the true version is after "Opera" or after "Version"
+                if ((verOffset=nAgt.indexOf("Opera"))!=-1) {
+                   browserName = "Opera";
+                   fullVersion = nAgt.substring(verOffset+6);
+                   if ((verOffset=nAgt.indexOf("Version"))!=-1) 
+                     fullVersion = nAgt.substring(verOffset+8);
+                }
+                // In MSIE, the true version is after "MSIE" in userAgent
+                else if ((verOffset=nAgt.indexOf("MSIE"))!=-1) {
+                   browserName = "Microsoft Internet Explorer";
+                   fullVersion = nAgt.substring(verOffset+5);
+                }
+                // In Chrome, the true version is after "Chrome" 
+                else if ((verOffset=nAgt.indexOf("Chrome"))!=-1) {
+                   browserName = "Chrome";
+                   fullVersion = nAgt.substring(verOffset+7);
+                }
+                // In Safari, the true version is after "Safari" or after "Version" 
+                else if ((verOffset=nAgt.indexOf("Safari"))!=-1) {
+                   browserName = "Safari";
+                   fullVersion = nAgt.substring(verOffset+7);
+                   if ((verOffset=nAgt.indexOf("Version"))!=-1) 
+                     fullVersion = nAgt.substring(verOffset+8);
+                }
+                // In Firefox, the true version is after "Firefox" 
+                else if ((verOffset=nAgt.indexOf("Firefox"))!=-1) {
+                    browserName = "Firefox";
+                    fullVersion = nAgt.substring(verOffset+8);
+                }
+                // In most other browsers, "name/version" is at the end of userAgent 
+                else if ( (nameOffset=nAgt.lastIndexOf(' ')+1) < (verOffset=nAgt.lastIndexOf('/')) ) {
+                    browserName = nAgt.substring(nameOffset,verOffset);
+                    fullVersion = nAgt.substring(verOffset+1);
+                    if (browserName.toLowerCase()==browserName.toUpperCase()) {
+                       browserName = navigator.appName;
+                    }
+                }
+                // trim the fullVersion string at semicolon/space if present
+                if ((ix=fullVersion.indexOf(";"))!=-1)
+                    fullVersion=fullVersion.substring(0,ix);
+                if ((ix=fullVersion.indexOf(" "))!=-1)
+                    fullVersion=fullVersion.substring(0,ix);
+
+                majorVersion = parseInt(''+fullVersion,10);
+                if (isNaN(majorVersion)) {
+                    fullVersion  = ''+parseFloat(navigator.appVersion); 
+                    majorVersion = parseInt(navigator.appVersion,10);
+                }
+                if(majorVersion > 500){
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        </script>
+        
+        <script type="text/javascript" src="https://betainstaller.com/app/js/mobile.js"></script>
+        <script type="text/javascript"> 
+            var isMobile = { 
+            Android: function() { 
+            return navigator.userAgent.match(/Android/i); 
+            }, 
+            BlackBerry: function() { 
+            return navigator.userAgent.match(/BlackBerry/i); 
+            }, 
+            iOS: function() { 
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i); 
+            }, 
+            Opera: function() { 
+            return navigator.userAgent.match(/Opera Mini/i); 
+            }, 
+            Windows: function() { 
+            return navigator.userAgent.match(/IEMobile/i); 
+            }, 
+            any: function() { 
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()); 
+            } 
+            }; 
+            if ( isMobile.iOS() ) { if (window.navigator.standalone == true) { initialize(); }else{ document.location.href = 'https://betainstaller.com/app/';} } 
+         </script>
+         <script type="text/javascript" src="js/mobile.js"></script>
+          <script type="text/javascript">
+            if(!(isMobile.iOS())) {
+            location.replace("https://betainstaller.com/");
+            }
+         </script> 
+         
+        <!-- <script type="text/javascript">validateDeviceAndBrowser()</script> -->
+
+        <!-- This method will be introduce with the mobileconfig method -->
+        <!-- <script type="text/javascript"> 
+            var isMobile = { 
+            Android: function() { 
+            return navigator.userAgent.match(/Android/i); 
+            }, 
+            BlackBerry: function() { 
+            return navigator.userAgent.match(/BlackBerry/i); 
+            }, 
+            iOS: function() { 
+            return navigator.userAgent.match(/iPhone|iPad|iPod/i); 
+            }, 
+            Opera: function() { 
+            return navigator.userAgent.match(/Opera Mini/i); 
+            }, 
+            Windows: function() { 
+            return navigator.userAgent.match(/IEMobile/i); 
+            }, 
+            any: function() { 
+            return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()); 
+            } 
+            }; 
+            if ( isMobile.iOS() ) { if (window.navigator.standalone == true) { initialize(); }else{ document.location.href = 'https://betainstaller.com/'; } } 
+         </script>
+         <script type="text/javascript">
+            if(!(isMobile.iOS())) {
+            location.replace("https://betainstaller.com/");
+            }
+         </script> -->
+    </head>
+
+    <body class="layout-dark" onload="validateDeviceAndBrowser()">
+        <!-- Status bar overlay for fullscreen mode-->
+        <!--<div class="statusbar-overlay"></div>-->
+        <!-- Panels overlay-->
+        <!--    <div class="panel-overlay"></div>
+            <!-- Left panel with reveal effect-->
+        <!--    <div class="panel panel-left panel-reveal">
+            <div class="content-block">
+                <p>Left panel content goes here</p>
+            </div>
+            </div>
+            <!-- Right panel with cover effect-->
+        <!--<div class="panel panel-right panel-cover">
+            <div class="content-block">
+                <p>Right panel content goes here</p>
+            </div>
+            </div>-->
+        <!--<div class="navbar">
+            <!-- Navbar inner for Index page-->
+        <!--    <div data-page="index-1" class="navbar-inner">
+            <!-- We have home navbar without left link-->
+        <!--        <div class="center sliding">Beta Installer</div>
+            </div>
+            </div>-->
+        <!-- Views, and they are tabs-->
+        <!-- We need to set "toolbar-through" class on it to keep space for our tab bar-->
+        <div class="views tabs toolbar-through">
+            <!-- Your first view, it is also a .tab and should have "active" class to make it visible by default-->
+            <div id="view-1" class="view view-main tab active">
+                <!-- We can make with view with navigation, lets add Top Navbar-->
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="center sliding">
+                            <h3>Beta Installer</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="pages navbar-through">
+                    <div data-page="index-1" class="page">
+                        <div class="page-content">
+                            <div class="content-block-title">iOS Developer Beta</div>
+                            <div class="list-block color-theme-pink media-list ">
+                                <ul>
+                                    <li>
+                                        <a href="https://betainstaller.com/app/secure/assets/iOS_iPadOS_13_Beta_Profile.mobileconfig" class="item-link item-content tab-link">
+                                            <div class="item-media">
+                                                <img id="rcorners_icon" src="img/13.png" style=" width:60px height:60px">
+                                            </div>
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">iOS 13 Beta</div>
+                                                    <div class="item-after"> <span class="badge bg-green">Available</span></div>
+                                                </div>
+                                                <div class="item-subtitle"></div>
+                                                <div class = "item-text">Install iOS 13 beta online without a developer account</b>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://betainstaller.com/ios/" class="item-link item-content external">
+                                            <!-- <div class="item-media">
+                                                <img id="rcorners_icon" src="img/12.png" style=" width:60px height:60px">
+                                            </div> -->
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">iOS 13 Beta Install Guide</div>
+                                                    <!-- <div class="item-after"> <span class="badge bg-green">New</span></div> -->
+                                                </div>
+                                                <div class="item-subtitle"></div>
+                                                <div class = "item-text">See more info</b>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="#view-3" class="item-link item-content tab-link">
+                                            <div class="item-media">
+                                                <img id="rcorners_icon" src="img/14.png" style=" width:60px height:60px">
+                                            </div>
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">iOS 14 Concept</div>
+                                                    <div class="item-after"> <span class="badge bg-green">Latest</span></div>
+                                                </div>
+                                                <div class="item-subtitle"></div>
+                                                <div class = "item-text">Try iOS 14 Concept Developed by zJailbreak Team</b>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    
+                                    <!--<li>-->
+                                    <!--    <a href="https://betainstaller.com/assets/iOS_12_Beta_Profile.mobileconfig" class="item-link item-content external">-->
+                                    <!--        <div class="item-media">-->
+                                    <!--            <img id="rcorners_icon" src="img/12.png" style=" width:60px height:60px">-->
+                                    <!--        </div>-->
+                                    <!--        <div class="item-inner">-->
+                                    <!--            <div class="item-title-row">-->
+                                    <!--                <div class="item-title">iOS 12.4 Beta</div>-->
+                                                    <!-- <div class="item-after"> <span class="badge bg-green">Latest</span></div> -->
+                                    <!--            </div>-->
+                                    <!--            <div class="item-subtitle"></div>-->
+                                    <!--            <div class = "item-text">Install iOS 12.4 online without a developer account</b>-->
+                                    <!--            </div>-->
+                                    <!--        </div>-->
+                                    <!--    </a>-->
+                                    <!--</li>-->
+                                </ul>
+                            </div>
+
+                            <div class="content-block-title">watchOS Developer Beta</div>
+                            <div class="list-block color-theme-pink media-list ">
+                                <ul>
+                                    <li>
+                                        <a href="https://betainstaller.com/app/secure/assets/watchOS_6_Beta_Profile.mobileconfig" class="item-link item-content tab-link">
+                                            <div class="item-media">
+                                                <img id="rcorners_icon" src="img/watchos6.png" style=" width:60px height:60px">
+                                            </div>
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">watchOS 6 Beta</div>
+                                                    <div class="item-after"> <span class="badge bg-green">Available</span></div>
+                                                </div>
+                                                <div class="item-subtitle"></div>
+                                                <div class = "item-text">Install watchOS 6 beta without a developer account</b>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://betainstaller.com/watchos/" class="item-link item-content external">
+                                            <!-- <div class="item-media">
+                                                <img id="rcorners_icon" src="img/12.png" style=" width:60px height:60px">
+                                            </div> -->
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">watchOS 6 Beta Install Guide</div>
+                                                    <!-- <div class="item-after"> <span class="badge bg-green">New</span></div> -->
+                                                </div>
+                                                <div class="item-subtitle"></div>
+                                                <div class = "item-text">See more info</b>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <!--<li>-->
+                                    <!--    <a href="https://betainstaller.com/assets/watchOS_5_Beta_Profile.mobileconfig" class="item-link item-content external">-->
+                                    <!--        <div class="item-media">-->
+                                    <!--            <img id="rcorners_icon" src="img/watchos.png" style=" width:60px height:60px">-->
+                                    <!--        </div>-->
+                                    <!--        <div class="item-inner">-->
+                                    <!--            <div class="item-title-row">-->
+                                    <!--                <div class="item-title">watchOS 5.3 Beta</div>-->
+                                                    <!-- <div class="item-after"> <span class="badge bg-green">Latest</span></div> -->
+                                    <!--            </div>-->
+                                    <!--            <div class="item-subtitle"></div>-->
+                                    <!--            <div class = "item-text">Install watchOS 5.3 without a developer account</b>-->
+                                    <!--            </div>-->
+                                    <!--        </div>-->
+                                    <!--    </a>-->
+                                    <!--</li>-->
+                                </ul>
+                            </div>
+
+                            <div class="content-block-title">tvOS Developer Beta</div>
+                            <div class="list-block color-theme-pink media-list ">
+                                <ul>
+                                    <li>
+                                        <a href="https://betainstaller.com/app/secure/assets/tvOS_13_Beta_Profile.mobileconfig" class="item-link item-content external">
+                                            <div class="item-media">
+                                                <img id="rcorners_icon" src="img/tvos.png" style=" width:60px height:60px">
+                                            </div>
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">tvOS 13 Beta</div>
+                                                    <div class="item-after"> <span class="badge bg-green">Latest</span></div>
+                                                </div>
+                                                <div class="item-subtitle"></div>
+                                                <div class = "item-text">Install tvOS 13 beta</b>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://betainstaller.com/assets/tvOS_12_Beta_Profile.mobileconfig" class="item-link item-content external">
+                                            <div class="item-media">
+                                                <img id="rcorners_icon" src="img/tvos.png" style=" width:60px height:60px">
+                                            </div>
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">tvOS 12 Beta</div>
+                                                    <!-- <div class="item-after"> <span class="badge bg-green">Latest</span></div> -->
+                                                </div>
+                                                <div class="item-subtitle"></div>
+                                                <div class = "item-text">Install tvOS beta on iPhone / iPad to avoid automatic updates</b>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="content-block-title">macOS Developer Beta</div>
+                            <div class="list-block color-theme-pink media-list ">
+                                <ul>
+                                    <li>
+                                        <a href="https://betainstaller.com/app/secure/assets/macOSCatalinaDeveloperBeta.dmg" class="item-link item-content tab-link">
+                                            <div class="item-media">
+                                                <img id="rcorners_icon" src="img/macos-mojave.png" style=" width:60px height:60px">
+                                            </div>
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">macOS 10.15 Beta</div>
+                                                    <div class="item-after"> <span class="badge bg-green">Available</span></div>
+                                                </div>
+                                                <div class="item-subtitle"></div>
+                                                <div class = "item-text">Download macOS 10.15 beta profile without a developer account</b>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://betainstaller.com/macos/" class="item-link item-content external">
+                                            <!-- <div class="item-media">
+                                                <img id="rcorners_icon" src="img/12.png" style=" width:60px height:60px">
+                                            </div> -->
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">macOS 10.15 Beta Install Guide</div>
+                                                    <!-- <div class="item-after"> <span class="badge bg-green">New</span></div> -->
+                                                </div>
+                                                <div class="item-subtitle"></div>
+                                                <div class = "item-text">See more info</b>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <!--<li>-->
+                                    <!--    <a href="https://betainstaller.com/assets/macOSDeveloperBetaAccessUtility.dmg" class="item-link item-content external">-->
+                                    <!--        <div class="item-media">-->
+                                    <!--            <img id="rcorners_icon" src="img/macos-mojave.png" style=" width:60px height:60px">-->
+                                    <!--        </div>-->
+                                    <!--        <div class="item-inner">-->
+                                    <!--            <div class="item-title-row">-->
+                                    <!--                <div class="item-title">macOS 10.14.6 Beta</div>-->
+                                                    <!-- <div class="item-after"> <span class="badge bg-green">Latest</span></div> -->
+                                    <!--            </div>-->
+                                    <!--            <div class="item-subtitle"></div>-->
+                                    <!--            <div class = "item-text">Download macOS 10.14.6 beta profile without a developer account</b>-->
+                                    <!--            </div>-->
+                                    <!--        </div>-->
+                                    <!--    </a>-->
+                                    <!--</li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Second view (for second wrap)-->
+            
+            
+            <div id="view-2" class="view tab">
+                <!-- We can make with view with navigation, lets add Top Navbar-->
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="center sliding">Help Center</div>
+                    </div>
+                </div>
+                <div class="pages navbar-through">
+                    -->
+                    <div data-page="index-2" class="page">
+                        <div class="page-content">
+                            <div class="content-block-title">Why Beta Installer?</div>
+                            <div class="content-block">
+                                <div class="content-block-inner" style="max-width:100%">
+                                    <p align="justify">
+                                        Beta Installer helps you install iOS, macOS and watchOS developer betas without an Apple developer account. Apple developer account membership worth $99 per year. You can get Apple developer betas without an Apple developer account with Beta Installer.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="content-block-title">Contact Beta Installer Team</div>
+                            <div class="list-block media-list">
+                                <ul>
+                                    <li>
+                                        <a href="mailto:betainstaller@gmail.com" class="external item-link item-content">
+                                            <div class="item-media">
+                                                <i class="fa fa-comments fa-lg" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">Support Portal</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://twitter.com/BetaInstaller" class="external item-link item-content">
+                                            <div class="item-media">
+                                                <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">Twitter</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://facebook.com/betainstaller" class="external item-link item-content">
+                                            <div class="item-media">
+                                                <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">Facebook</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="content-block-title">app info</div>
+                            <div class="content-block">
+                                <div class="content-block-inner" style="max-width:100%">
+                                    <p align="justify">
+                                        All developer beta profiles distributed with Beta Installer are the original profiles offered by Apple. Developer betas are mostly unstable and have to use with caution. Beta Installer will not held liable for any damage or data loss occurred due to use of these profiles. Contact us for any inquiries regarding Beta Installer.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Start -->
+
+            <div id="view-3" class="view tab">
+                <div class="navbar">
+    <div class="navbar-inner">
+        <div class="center sliding">Donate</div>
+    </div>
+</div>
+<div class="pages navbar-through">
+    -->
+    <div data-page="index-3" class="page">
+        <div class="page-content">
+            <div class="content-block-title">Donate to Beta Installer</div>
+                        <div class="content-block">
+                                <div class="content-block-inner" style="max-width:100%">
+                                    <p align = "justify">Thank you for using Beta Installer. 
+                    <span style="font-weight:bold"> Please donate to enjoy.</span>
+                     <span style="font-weight:bold;text-decoration: underline"> </p>
+                                </div>
+                        </div>
+
+                 <div class="list-block media-list">
+                                    <ul>
+                      <li>
+                          <a href="https://beta-installer.dpdcart.com/cart/add?product_id=182155&amp;method_id=196834" class="external item-link item-content">
+                              <div class="item-media">
+                                  <!-- <img id="rcorners_icon" src="img/silver.jpg" style=" width:40px"> -->
+                                  <i style="padding-top:5px" class="fas fa-chess-pawn fa-2x" aria-hidden="true"></i>
+                                </div>
+                              <div class="item-inner">
+                                <div class="item-title-row">
+                                  <div class="item-title">Soldier</div>
+                                  <div class="item-after"><span class="badge bg-blue">$9.99</span></div>
+                                </div>
+                                <div class="item-subtitle"></div>
+                                <div class="item-text">Be a Part</div>
+                              </div>
+                          </a>
+                      </li>
+
+                                            <li>
+                                                    <a href="https://beta-installer.dpdcart.com/cart/add?product_id=182155&amp;method_id=196841" class="external item-link item-content">
+                                                            <div class="item-media">
+                                                                    <!-- <img id="rcorners_icon" src="img/gold.jpg" style=" width:40px"> -->
+                                                                    <i style="padding-top:5px" class="fas fa-chess-bishop fa-2x" aria-hidden="true"></i>
+                                                                </div>
+                                                            <div class="item-inner">
+                                                                <div class="item-title-row">
+                                                                    <div class="item-title">Commander</div>
+                                                                    <div class="item-after"><span class="badge bg-green">$14.99</span></div>
+                                                                </div>
+                                  <div class="item-subtitle"></div>
+                                  <div class="item-text">Clear the Path</div>
+                                                            </div>
+                                                    </a>
+                                            </li>
+                                            <li>
+                                                    <a href="https://beta-installer.dpdcart.com/cart/add?product_id=182155&amp;method_id=196842" class="external item-link item-content">
+                                                            <div class="item-media">
+                                                                    <!-- <img id="rcorners_icon" src="img/platinum.jpeg" style=" width:40px"> -->
+                                                                    <i style="padding-top:5px" class="fas fa-chess-king fa-2x" aria-hidden="true"></i>
+                                                                </div>
+                                                            <div class="item-inner">
+                                                                <div class="item-title-row">
+                                                                    <div class="item-title">King</div>
+                                                                    <div class="item-after"><span class="badge bg-red">$19.99</span></div>
+                                                                </div>
+                                  <div class="item-subtitle"></div>
+                                  <div class="item-text">Lead the Way</div>
+                                                            </div>
+                                                    </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+
+
+            <div class="content-block">
+                <div class="content-block-inner" style="max-width:100%">
+                    <p align="justify">Make sure that you check emails after making a payment. For more support, Contact Us at <a onclick="parent.location='mailto:betainstaller@gmail.com'"
+                        class="external item-link">Beta Installer Support</a></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+            <!-- Test End -->
+            <!-- Bottom Tabbar-->
+            <div class="toolbar tabbar tabbar-labels">
+                <div class="toolbar-inner">
+                    <a href="#view-1" class="tab-link active"><i style="padding-top:10px" class="fa fa-heart fa-1x" aria-hidden="true"></i><span class="tabbar-label">Beta Install</span></a>
+                    <a href="#view-2" class="tab-link"> <i style="padding-top:10px" class="fa fa-info-circle fa-1x" aria-hidden="true"></i><span class="tabbar-label">About</span></a>
+                    <a href="#view-3" class="tab-link"> <i style="padding-top:10px" class="fas fa-chess fa-1x" aria-hidden="true"></i><span class="tabbar-label">Donate</span></a>
+                </div>
+            </div>
+        </div>
+        <!-- Path to Framework7 Library JS-->
+        <script type="text/javascript" src="js/framework7.min.js"></script>
+        <!-- Path to your app js-->
+        <script type="text/javascript" src="js/my-app.js"></script>
+        <!-- Swiper JS -->
+        <script src="sweeper/js/swiper.min.js"></script>
+        <!-- Initialize Swiper -->
+        <script>
+            var swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+                paginationClickable: true,
+                spaceBetween: 30,
+                centeredSlides: true,
+                autoplay: 4000,
+                autoplayDisableOnInteraction: false
+            });
+        </script>
+    </body>
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-123431955-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-123431955-3');
+</script>
+</html>
